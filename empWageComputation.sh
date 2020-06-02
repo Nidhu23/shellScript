@@ -27,11 +27,5 @@ do
         totalEmpHrs=$(($totalEmpHrs+$WorkingHrs))
 	dailyWage["$totalWorkingDays"]=$(($WorkingHrs*$ratePerHr))
 	totalSalary=$(($totalSalary+${dailyWage["$totalWorkingDays"]}))
-	#echo ${!dailyWage[@]}
 	echo -e $totalWorkingDays "\t\t"${dailyWage["$totalWorkingDays"]}"\t\t"$totalSalary
-	#echo ${dailyWage["$totalWorkingDays"]}
 done
-#totalSalary=$(($totalEmpHrs*$ratePerHr))
-#echo $totalSalary
-#echo ${dailyWage[@]}
-#echo ${!dailyWage[@]}
