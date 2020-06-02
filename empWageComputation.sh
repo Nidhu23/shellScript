@@ -8,7 +8,7 @@ workingDays=20;
 totalSalary=0;
 totalEmpHrs=0;
 totalWorkingDays=0;
-
+declare -A dailyWage
 function  getWorkingHours(){
 case $1 in
         $fullTime) empHrs=8;;
@@ -17,14 +17,21 @@ case $1 in
 esac
 echo $empHrs
 }
+echo -e "Day No.\t\tDailyWage\tTotalWage" 
+
 while [[ $totalEmpHrs -lt $maxHrs && $totalWorkingDays -lt $workingDays ]]
 do
         ((totalWorkingDays++))
         empCheck=$(($RANDOM%3))
         WorkingHrs=$(getWorkingHours  $empCheck )
         totalEmpHrs=$(($totalEmpHrs+$WorkingHrs))
-	dailyWage[$totalWorkingDays]=$(($WorkingHrs*$ratePerHr))
+	dailyWage["$totalWorkingDays"]=$(($WorkingHrs*$ratePerHr))
+	totalSalary=$(($totalSalary+${dailyWage["$totalWorkingDays"]}))
+	#echo ${!dailyWage[@]}
+	echo -e $totalWorkingDays "\t\t"${dailyWage["$totalWorkingDays"]}"\t\t"$totalSalary
+	#echo ${dailyWage["$totalWorkingDays"]}
 done
-totalSalary=$(($totalEmpHrs*$ratePerHr))
-echo $totalSalary
-echo ${dailyWage[@]}
+#totalSalary=$(($totalEmpHrs*$ratePerHr))
+#echo $totalSalary
+#echo ${dailyWage[@]}
+#echo ${!dailyWage[@]}
